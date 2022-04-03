@@ -12,10 +12,19 @@
     flex-direction: column;
 }
 
-.player-announce {
+.announcements {
     text-align: center;
     width: 100%;
 }
+
+.player-announce {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
+
+
 .gameform {
     display: flex;
     flex-direction: column;
@@ -37,6 +46,7 @@
     align-items: center;
     cursor: pointer;
     justify-content: center;
+    font-size: 30px;
 }
 
 span {
