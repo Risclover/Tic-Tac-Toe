@@ -1,0 +1,106 @@
+.maincontainer {
+    display: none;
+    background-color: white;
+    margin: 20px auto 10px auto;
+    width: 300px;
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+#wrapper, #wrapper2 {
+    display: none;
+    flex-direction: column;
+}
+
+.player-announce {
+    text-align: center;
+    width: 100%;
+}
+.gameform {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: space-between;
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid black;
+    padding: 3px 8px;
+}
+
+.form-div {
+    margin: 5px 0;
+    display: flex;
+}
+
+.square {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+span {
+    margin-right: 3px;
+}
+
+label {
+    margin-right: 3px;
+}
+
+
+.quickstart {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.startbtn-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.s0 {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.s1 {
+    border: 1px solid black;
+    border-top: 0;
+}
+
+.s2 {
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.s3 {
+    border: 1px solid black;
+    border-left: 0;
+}
+
+.s4 {
+    border: 1px solid black;
+}
+
+.s5 {
+    border: 1px solid black;
+    border-right: 0;
+}
+
+.s6 {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.s7 {
+    border: 1px solid black;
+    border-bottom: 0;
+}
+
+.s8 {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}

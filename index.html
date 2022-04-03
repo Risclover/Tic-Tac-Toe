@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="instructions">
+        <h3>Rounds</h3>
+        <ul>
+            <li>
+                <strong>Single Round</strong>: Play a single round.
+            </li>
+            <li>
+                <strong># of Rounds</strong>: Pick # of rounds to play.
+            </li>
+            <li>
+                <strong>Infinite Rounds</strong>: Play infinite rounds until players decide to stop.
+            </li>
+        </ul>
+        <h3>Deciding Pieces</h3>
+        <p>X always goes first.</p>
+        <ul>
+            <li>
+                <strong>Players Pick</strong>: Players decide amongst themselves who gets which piece. 
+            </li>
+            <li>
+                <strong>Alternate</strong>: Pieces alternate between players each round.
+            </li>
+            <li>
+                <strong>Random</strong>: Computer chooses pieces at random at the start of each round.
+            </li>
+        </ul>
+
+    </div>
+    <div class="player-announce">
+
+    </div>
+
+    <div class="gameform">
+        <button class="quickstart">Quick Start</button>
+        <div class="form-div">
+            <label for="player1">Player 1 Name:</label>
+            <input type="text" name="player1" id="player1name">
+        </div>
+        <div class="form-div">
+            <label for="player2">Player 2 Name:</label>
+            <input type="text" name="player2" id="player2name">
+        </div>
+        <div class="form-div">
+            <span>Rounds:</span>
+            <select id="roundspick">
+                <option value="default" selected disabled>Choose one</option>
+                <option value="Single">Single Round</option>
+                <option value="Pick">Pick Rounds</option>
+                <option value="Infinite">Infinite Rounds</option>
+            </select>
+        </div>
+        <div id="wrapper2">
+            <div class="form-div">
+                <label># of Rounds:</label>
+                <input type="number" class="rounds-val" placeholder="Ex: 3">
+            </div>
+        </div>
+        <div class="form-div">
+            <span>Game Pieces:</span>
+            <select id="pieces">
+                <option value="default" selected disabled>Choose one</option>
+                <option value="Players">Players pick</option>
+                <option value="Alternate">Alternate</option>
+                <option value="Random">Random</option>
+            </select>
+        </div>
+        <div id="wrapper">
+            <div class="form-div">
+                <label>Player 1 Piece:</label>
+                <select id="option1">
+                    <option value="default" disabled selected>Choose one</option>
+                    <option value="X">X</option>
+                    <option value="O">O</option>
+                </select>
+            </div>
+            <div class="form-div">
+                <label>Player 2 Piece:</label>
+                <select id="option2">
+                    <option value="default" disabled selected>Choose one</option>
+                    <option value="O">O</option>
+                    <option value="X">X</option>
+                </select>
+            </div>
+        </div>
+        <div class="startbtn-box">
+            <button class="startbtn">Start Game</button>
+        </div>
+    </div>
+    <div class="maincontainer">
+
+    </div>
+    <script src="basic.js"></script>
+</body>
+</html>
