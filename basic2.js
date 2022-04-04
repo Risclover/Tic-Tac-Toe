@@ -328,6 +328,7 @@ const gamePlay = (() => {
                     endGame();
                 } else {
                     endGame();
+                    // testing
                 }
             } else {
                 newRound();
