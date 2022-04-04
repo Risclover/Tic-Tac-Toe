@@ -33,7 +33,7 @@ const displayController = (() => {
 })();
 
 const gameSetup = (() => {
-    
+
 })();
 
 const gameBoard = (() => {
@@ -59,7 +59,7 @@ const gameBoard = (() => {
         const squares = document.querySelectorAll('.square');
         squares.forEach((square, index) => {
             square.addEventListener('click', function(e) {
-                if(e.target.textContent === "") {
+                if(e.target.innerHTML === "" && square.textContent === "") {
                     if(activePlayer === playerOne) {
                         if(playerOne.marker != "X" && playerOne.marker != "O") {
                             e.target.innerHTML = playerOne.marker;
