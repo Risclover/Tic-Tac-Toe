@@ -327,7 +327,7 @@ const gamePlay = (() => {
                 if(playerOne.score != playerTwo.score) {
                     endGame();
                 } else {
-                
+                    endGame();
                 }
             } else {
                 newRound();
