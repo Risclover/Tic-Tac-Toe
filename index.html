@@ -5,9 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
+    <script src="https://kit.fontawesome.com/2b4114baf6.js" crossorigin="anonymous"></script>
+
     <link href="styles.css" rel="stylesheet">
+
 </head>
 <body>
+    <!-- Instructions -->
     <div class="instructions">
         <h3>Rounds</h3>
         <ul>
@@ -18,14 +22,48 @@
                 <strong># of Rounds</strong>: Pick # of rounds to play.
             </li>
             <li>
-                <strong>Infinite Rounds</strong>: Play infinite rounds until players decide to stop.
+                <strong>Ongoing Rounds</strong>: Play ongoing rounds until players decide to stop.
             </li>
         </ul>
         <h3>Deciding Pieces</h3>
         <p>X always goes first.</p>
         <ul>
             <li>
-                <strong>Players Pick</strong>: Players decide amongst themselves who gets which piece. 
+                <strong>Players Pick</strong>: Players decide amongst themselves who gets which piece.
+                <ul>
+                    <li>
+                        <strong>Regular</strong>: Pick who gets "X" and who gets "O".
+                    </li>
+                    <li>
+                        <strong>Custom</strong>: If you would like to use custom markers, you can! This game uses Font Awesome's library of <strong>free</strong> icons. 
+                        <ol>
+                            <li>
+                                Go to Font Awesome website, located at <a href="https://www.fontawesome.com" target="_blank">https://www.fontawesome.com/</a>
+                            </li>
+                            <li>
+                                Click "Icons"
+                            </li>
+                            <li>
+                                The version should automatically be set to the latest version. If you use Font Awesome regularly for your own purposes, make sure that it is  via the dropdown menu located in the search box.
+                            </li>
+                            <li>
+                                To start viewing the library without searching for anything, simply click on the Search box and press Enter.
+                            </li>
+                            <li>
+                                Select the "Free" filter. Pro icons will <strong>not</strong> work.
+                            </li>
+                            <li>
+                                Find an icon to use as your marker and click on it.
+                            </li>
+                            <li>
+                                When the icon information pops up, you will see a code snippet that looks similar to this: <code>&lt;i class="fa-solid fa-00"&gt;&lt;/i&gt;</code> Click on it to copy it to your clipboard.
+                            </li>
+                            <li>
+                                Paste the <code>&lt;i&gt;&lt;/i&gt;</code> code snippet into the text box for your player's custom marker.
+                            </li>
+                        </ol>
+                    </li>
+                </ul> 
             </li>
             <li>
                 <strong>Alternate</strong>: Pieces alternate between players each round.
@@ -36,27 +74,43 @@
         </ul>
 
     </div>
-    <div class="player-announce">
 
+    <!-- Announcements / Scores -->
+    <div class="announcements">
+        <div class="player-announce">     
+        </div>
+        <div class="player-scores">
+            <div class="scorebox">
+                <p><strong>Player 1:</strong> <span class="score1">0</span></p>
+            </div>
+            <div class="scorebox">
+                <p><strong>Player 2:</strong> <span class="score2">0</span></p>
+            </div>
+        </div>
+        <div class="round-number">
+            <p><strong>Round</strong> <span class="current-round">1</span>of <span class="total-rounds">1</span></p>
+        </div>
     </div>
 
+    <!-- Game form -->
     <div class="gameform">
         <button class="quickstart">Quick Start</button>
         <div class="form-div">
-            <label for="player1">Player 1 Name:</label>
-            <input type="text" name="player1" id="player1name">
+            <label for="player1">Player 1 Name: </label>
+            <input type="text" name="player1" id="player1name" placeholder="Ex: Sara">
         </div>
         <div class="form-div">
-            <label for="player2">Player 2 Name:</label>
-            <input type="text" name="player2" id="player2name">
+            <label for="player2">Player 2 Name: </label>
+            <input type="text" name="player2" id="player2name" placeholder="Ex: Jo">
         </div>
+        <hr />
         <div class="form-div">
-            <span>Rounds:</span>
+            <span>Rounds: </span>
             <select id="roundspick">
                 <option value="default" selected disabled>Choose one</option>
                 <option value="Single">Single Round</option>
                 <option value="Pick">Pick Rounds</option>
-                <option value="Infinite">Infinite Rounds</option>
+                <option value="Ongoing">Ongoing Rounds</option>
             </select>
         </div>
         <div id="wrapper2">
@@ -65,16 +119,16 @@
                 <input type="number" class="rounds-val" placeholder="Ex: 3">
             </div>
         </div>
+        <hr />
         <div class="form-div">
-            <span>Game Pieces:</span>
+            <span>Game Pieces: </span>
             <select id="pieces">
                 <option value="default" selected disabled>Choose one</option>
-                <option value="Players">Players pick</option>
-                <option value="Alternate">Alternate</option>
-                <option value="Random">Random</option>
+                <option value="Classic">Classic (X's and O's)</option>
+                <option value="Custom">Custom</option>
             </select>
         </div>
-        <div id="wrapper">
+        <div class="classic-markers">
             <div class="form-div">
                 <label>Player 1 Piece:</label>
                 <select id="option1">
@@ -92,13 +146,45 @@
                 </select>
             </div>
         </div>
+        <div class="custom-markers">
+            <p><strong>Custom markers:</strong></p>
+            <div class="form-div">
+                <label>Player 1:</label>
+                <input type="text" class="fa-unique" placeholder='Ex: <i class="fa-solid fa-skull-crossbones"></i>''>
+            </div>
+            <div class="form-div">
+                <label>Player 2:</label>
+                <input type="text" class="fa-unique2" placeholder='Ex: <i class="fa-solid fa-0"></i>'>
+            </div>
+        </div>        
+        <hr />
+        <div class="form-div">
+            <label>Decide Who Goes First: </label>
+            <select class="whogoesfirst">
+                <option value="Default" disabled selected>Choose One</option>
+                <option value="Pick">Players pick</option>
+                <option value="Classic">Classic</option>
+                <option value="Alternate">Alternate</option>
+                <option value="Random">Random</option>
+            </select>
+        </div>
+        <div class="first-round-box">
+            <label>First Round:</label>
+            <select class="first-round">
+                <option value="Default" disabled selected>Choose One</option>
+                <option value="playerone">Player 1</option>
+                <option value="playertwo">Player 2</option>
+            </select>
+        </div>
         <div class="startbtn-box">
             <button class="startbtn">Start Game</button>
         </div>
     </div>
+
+    <!-- Game board -->
     <div class="maincontainer">
 
     </div>
-    <script src="basic.js"></script>
+    <script src="basic2.js"></script>
 </body>
 </html>
