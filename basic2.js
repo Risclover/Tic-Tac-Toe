@@ -155,6 +155,7 @@ const gameSetup = (() => {
                     activePlayer = playerTwo;
                 }
             }
+            playerAnnounce.textContent = `${activePlayer.name} has been chosen to go first.`
             console.log(`First Mode: ${firstMode}; Goes first: ${wentFirst}; Active player: ${activePlayer.name}`)
         }
         firstRound.addEventListener('change', function() {
@@ -165,6 +166,7 @@ const gameSetup = (() => {
                 activePlayer = playerTwo;
                 wentFirst = "Player 2";
             }
+            playerAnnounce.textContent = `${activePlayer.name} has been chosen to go first.`
             console.log(`First Mode: ${firstMode}; Goes first: ${wentFirst}; Active player: ${activePlayer.name}`)
         });
     }
@@ -244,12 +246,12 @@ const gamePlay = (() => {
                             }
                         }
                     }
-                }
-                board[index] = activePlayer.marker;
-                if(tieBreaker === false) {
-                    playRound();
-                } else {
-                    tieBreakerRound();
+                    board[index] = activePlayer.marker;
+                    if(tieBreaker === false) {
+                        playRound();
+                    } else {
+                        tieBreakerRound();
+                    }
                 }
             });
         });
@@ -271,7 +273,15 @@ const gamePlay = (() => {
     function gameTie() {
         playerAnnounce.textContent = "Draw!";
         console.log("It's a tie - no winner!");
-        newRound();
+        if(roundsPassed === rounds) {
+            if(playerOne.score != playerTwo.score) {
+                endGame();
+            } else {
+                endGame();
+            }
+        } else {
+            newRound();
+        }
     }
 
     function changePlayer() {
@@ -280,6 +290,7 @@ const gamePlay = (() => {
         } else {
             activePlayer = playerOne;
         }
+        playerAnnounce.textContent = `It's ${activePlayer.name}'s turn.`;
     }
 
     function checkWinner() {
@@ -314,6 +325,8 @@ const gamePlay = (() => {
         if(winnerDeclared === true) {
             if(roundsPassed === rounds) {
                 if(playerOne.score != playerTwo.score) {
+                    endGame();
+                } else {
                     endGame();
                 }
             } else {
