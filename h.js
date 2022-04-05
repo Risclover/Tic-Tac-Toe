@@ -1,3 +1,4 @@
+
 const faUnique = document.querySelector('.fa-unique');
 const faUnique2 = document.querySelector('.fa-unique2');
 const quickStart = document.querySelector('.quickstart');
@@ -26,35 +27,22 @@ const announcements = document.querySelector('.announcements');
 const expandInstructions = document.querySelector('.expand-instructions');
 const expandBtn = document.querySelector('.expandbtn');
 const instructionsText = document.querySelector('.instructions-text');
-const quitBtn = document.querySelector('.quitbtn');
-const tieBtn = document.createElement('button');
-const roundDiv = document.querySelector('.round-number');
-
 // Player factory
 const Players = (name, marker, score) => {
     return {name, marker, score};
 }
 
-const Modes = (mode) => {
-    const getMode = () => mode;
-    
-    const setMode = (input) => {
-        mode = input;
-    }
-
-    return {getMode, setMode};
-}
-let roundsMode = Modes("single");
 const playerOne = Players("Player 1", "X", 0)
 const playerTwo = Players("Player 2", "O", 0)
 let activePlayer = playerOne;
 let rounds = 1;
 let roundsPassed = 1;
 let tieBreaker = false;
-let wentFirst = "";
 
 // Game Setup 
 const gameSetup = (() => {
+    let roundsMode = "single";
+
     instructionsText.addEventListener('click', function() {
         if(expandBtn.textContent === "expand_more") {
             expandBtn.textContent = "expand_less";
@@ -64,6 +52,9 @@ const gameSetup = (() => {
             expandInstructions.style.display = "none";
         }
     })
+    function quickPlay() {
+        gamePlay.startGame();
+    }
 
     // Set player names
     function setNamesP1() {
@@ -91,7 +82,7 @@ const gameSetup = (() => {
                     playerAnnounce.textContent = "ERROR: Please enter a valid number in the '# of Rounds' input box.";
                 } else {
                     rounds = parseInt(roundsVal.value);
-                    roundsMode.setMode("pick");
+                    roundsMode = "pick";
                     console.log(`Rounds: ${rounds}; Rounds Mode: ${roundsMode}`);
                 }
             });
@@ -101,20 +92,15 @@ const gameSetup = (() => {
             
             // Rounds mode: "single"
             if (roundsPick.value === 'Single') {
-                roundsMode.setMode("single");
+                roundsMode = "single";
                 rounds = 1;
     
             // Rounds mode: "ongoing"
             } else if (roundsPick.value === 'Ongoing') {
-                roundsMode.setMode("ongoing");
+                roundsMode = "ongoing";
                 rounds = Number.MAX_SAFE_INTEGER;    
-                totalRounds.textContent = "∞";
-                quitBtn.style.display = "block";
-                quitBtn.addEventListener('click', function() {
-                    gamePlay.endGame();
-                })
             }
-            console.log(`Rounds: ${rounds}; Rounds Mode: ${roundsMode.getMode()}`);
+            console.log(`Rounds: ${rounds}; Rounds Mode: ${roundsMode}`);
         }
 
     }
@@ -146,14 +132,6 @@ const gameSetup = (() => {
             customMarkers.style.display = "flex";
             classicMarkers.style.display = "none";
         }
-        if(playerOne.marker === "X") {
-            activePlayer = playerOne;
-        } else if (playerTwo.marker === "X") {
-            activePlayer = playerTwo;
-        } else {
-            activePlayer = playerOne;
-        }
-        console.log(`Active player: ${activePlayer.name}`)
     }
 
     faUnique.addEventListener('change', function() {
@@ -165,6 +143,7 @@ const gameSetup = (() => {
         console.log(`Player 2 marker: ${playerTwo.marker}`)
     })
 
+
     pieces.addEventListener('change', setMarkers);
     roundsPick.addEventListener('change', setRounds);
     playerOneName.addEventListener('change', setNamesP1);
@@ -172,7 +151,7 @@ const gameSetup = (() => {
     option1.addEventListener('change', matchOptions);
     option2.addEventListener('change', matchOptions);
 
-    return {setRounds}
+    return {setRounds, quickPlay, roundsMode}
 })();
 
 
@@ -189,7 +168,6 @@ const gamePlay = (() => {
     ];
 
     function newRound() {
-        playerAnnounce.textContent = `${winner} won that round!`
         remainingSpots = 9;
         winner = "";
         winnerDeclared = false;
@@ -199,13 +177,6 @@ const gamePlay = (() => {
             ["", "", ""]
         ];
         roundsPassed += 1;
-        if(wentFirst === playerOne) {
-            activePlayer = playerTwo;
-        } else {
-            activePlayer = playerOne;
-        }
-        wentFirst = activePlayer;
-        console.log(`Starting new round (round ${rounds}) is: ${activePlayer.name}!`)
         createGameboard();
     };
 
@@ -221,14 +192,19 @@ const gamePlay = (() => {
             mainBox.appendChild(square);
             square.classList.add('square', 's' + i);
         }
+        if(playerOne.marker === "X") {
+            activePlayer = playerOne;
+        } else if (playerTwo.marker === "X") {
+            activePlayer = playerTwo;
+        } else {
+            activePlayer = playerOne;
+        }
+        console.log(`Active player: ${activePlayer.name}`)
+
+        playerAnnounce.textContent = `${activePlayer.name} goes first.`;
         playerAnnounce.appendChild(roundAnnounce);
         currentRound.textContent = roundsPassed;
-        if(roundsMode.getMode() !== "ongoing") {
-            totalRounds.textContent = rounds;
-        }
-        if(roundsPassed === 1) {
-            playerAnnounce.textContent = `${activePlayer.name} goes first.`;
-        }
+        totalRounds.textContent = rounds;
         const squares = document.querySelectorAll('.square');
         squares.forEach((square, index) => {
             square.addEventListener('click', function() {
@@ -255,16 +231,18 @@ const gamePlay = (() => {
                         }
                     }
                     board[index] = activePlayer.marker;
-                    playRound();
+                    if(tieBreaker === false) {
+                        newRound
+                    } else {
+                        tieBreakerRound();
+                    }
                 }
             });
         });
     }
 
     function playRound() {
-        document.querySelector('.win-announce').textContent = "";
         remainingSpots -= 1;
-        winnerDeclared = false;
         checkWinner();
         if(winnerDeclared === false) {
             if(remainingSpots > 0) {
@@ -277,36 +255,26 @@ const gamePlay = (() => {
     }
 
     function gameTie() {
-        winner = "Nobody";
-        if(tieBreaker === true && roundsMode.getMode() === "ongoing") {
-            endGame();
-        } else if((tieBreaker === true) || (roundsPassed === rounds) && roundsMode.getMode() != "ongoing") {
-            endGame();
+        roundAnnounce.textContent = "It's a draw. Nobody scores.";    
+        console.log("It's a tie - no winner!");
+        if(roundsPassed === rounds) {
+            if(playerOne.score != playerTwo.score) {
+                endGame();
+            } else {
+                endGame();
+            }
         } else {
             newRound();
         }
     }
 
     function changePlayer() {
-        console.log(`Remaining spots: ${remainingSpots}; Winner declared: ${winnerDeclared}; winner: ${winner}`)
         if(activePlayer === playerOne) {
             activePlayer = playerTwo;
         } else {
             activePlayer = playerOne;
         }
-        if(activePlayer === playerOne) {
-            
-            playerOneLabel.style.backgroundColor = "#fff189";
-            playerTwoLabel.style.backgroundColor = "white";
-        } else {
-            playerOneLabel.style.backgroundColor = "white";
-            playerTwoLabel.style.backgroundColor = "#fff189";
-        }
-        console.log(winnerDeclared)
-        playerAnnounce.textContent = `It's ${activePlayer.name}'s turn.`
-        if (winnerDeclared === true) {
-            document.querySelector('.win-announce').textContent += `${winner} won that round!`;
-        }
+        playerAnnounce.textContent = `It's ${activePlayer.name}'s turn.`;
     }
 
     function checkWinner() {
@@ -326,33 +294,32 @@ const gamePlay = (() => {
                 winnerDeclared = true;
                 console.log('Winner Declared: ' + winnerDeclared);
                 winner = activePlayer.name;
+                roundAnnounce.textContent = `Tic-tac-toe, 3 in a row ~ ${activePlayer.name} wins this round!`
                 console.log('Winner: ' + winner);
                 if(winner === playerOne.name) {
                     playerOne.score += 1;
                 } else {
                     playerTwo.score += 1;
                 }
-                document.querySelector('.win-announce').textContent = `${winner} won that round!`;
-
+                
                 score1.textContent = parseInt(playerOne.score);
                 score2.textContent = parseInt(playerTwo.score);
             } 
         })
         if(winnerDeclared === true) {
-            if(tieBreaker === true) {  
-                endGame();
-            } else {
-                if(roundsPassed === rounds) {
+            if(roundsPassed === rounds) {
+                if(playerOne.score != playerTwo.score) {
                     endGame();
                 } else {
-                    newRound();
+                    endGame();
                 }
+            } else {
+                newRound();
             }
         }
     }
 
     function endGame() {
-        document.querySelector('.win-announce').textContent = "";
         const restartBtn = document.createElement('button');
         restartBtn.classList.add('restart');
         restartBtn.textContent = "Start over";
@@ -364,39 +331,45 @@ const gamePlay = (() => {
             playerAnnounce.textContent = `${playerOne.name} wins!`;
         } else if (playerOne.score < playerTwo.score) {
             playerAnnounce.textContent = `${playerTwo.name} wins!`;
-        } else {
-            playerAnnounce.textContent = `It's a tie, so nobody wins! Would you like to play a tiebreaker round?`
-            playerAnnounce.appendChild(tieBtn);
         }
-        tieBtn.textContent = "Play tiebreaker";
-        tieBtn.classList.add('restart');
-        tieBtn.addEventListener('click', tieBreakerRound)
         playerAnnounce.appendChild(restartBtn);
         disableBoard();
     }
 
-    function tieBreakerRound() {
+    function tieGame() {
+        playerAnnounce.textContent = `It's a tie game! Would you like to play one more round? This one's for all the marbles.`;
+        const yesBtn = document.createElement('button');
+        yesBtn.textContent = "Play tiebreaker";
+        playerAnnounce.appendChild(yesBtn);
+        yesBtn.addEventListener('click', lastRound);
+    }
+
+    function lastRound() {
         tieBreaker = true;
-        roundDiv.innerHTML = "<p><strong>Rounds:</strong> Tiebreaker";
-        newRound();
+        createGameboard();
+    }
+
+    function tieBreakerRound() {
+        checkWinner();
     }
 
     function disableBoard() {
-        mainBox.style.display = "none";
+        mainBox.innerHTML = "";
     }
 
     startGame.addEventListener('click', createGameboard);
     
-    return {newRound, board, remainingSpots, endGame};
+    return {newRound, board};
 })();
 
 
 /*
-
-    [x] Figure out how to make entire game end when rounds are over
-    [x] Set up turn announcements
-    [x] Set up "(name) goes first" announcements @ start of new round
-    [ ] Figure out how to do tiebreakers
-        [ ] And also what to do if tiebreaker is also a draw
-
+    [X] Figure out how to set who goes first at the start of each round
+        - Answer: Alternate who goes first.
+    [X] Figure out how to make entire game end when rounds are over
+    [X] Set up turn announcements
+    [ ] Set up "(name) goes first" announcements @ start of new round
+    [ ] Figure out how to implement "tiebreaker" rounds if scores are tied @ the end
+        [ ] And also if the score is tied when the player presses the "Quit" button
+        [ ] And also if there is a Draw for the tiebreaker round
 */
