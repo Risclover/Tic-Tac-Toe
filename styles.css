@@ -15,6 +15,11 @@ body {
     flex-direction: column;
 }
 
+.restart {
+    width: 100px;
+    margin: 10px auto;
+}
+
 .announcements {
     text-align: center;
     width: 100%;
@@ -23,6 +28,13 @@ body {
 
 .first-round-box {
     display: none;
+}
+
+.player-scores {
+    display: flex;
+    width: 250px;
+    margin: 0 auto;
+    justify-content: space-around;
 }
 
 .player-announce {
@@ -49,9 +61,9 @@ h3 {
 }
 
 .form-div {
-    margin: 3px 0 0 0;
+    margin: 5px 0;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .instructions {
@@ -66,11 +78,21 @@ h3 {
 }
 
 input {
-    margin: 5px 0;
+    padding: 3px;
+}
+
+select {
+    display: flex;
+    align-items: center;
+    padding: 3px;
 }
 
 p {
     margin: 5px 3px 3px 3px;
+}
+
+h1 {
+    font-family: 'Montserrat', serif;
 }
 
 .square {
@@ -81,12 +103,9 @@ p {
     font-size: 30px;
 }
 
-span {
-    margin-right: 3px;
-}
 
 label {
-    margin-right: 3px;
+    margin-left: 1px;
 }
 
 
@@ -98,7 +117,8 @@ label {
 .startbtn-box {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    margin-top: 10px;
+    align-items: center;
     justify-content: center;
     width: 100%;
 }
