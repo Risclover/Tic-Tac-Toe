@@ -23,7 +23,7 @@ This is Tic Tac Toe, the classic game that we've all played as children. Two pla
 ## Updates
 [Back to Top](#table-of-contents)
 
-
+* **04/05/22**: Game officially released (v1.0)!
 
 ## How to Play
 [Back to Top](#table-of-contents)
@@ -84,5 +84,16 @@ As long as the version number is correct, and as long as you use a free icon, th
 ## Build
 [Back to Top](#table-of-contents)
 
+This game was built using the following languages:
+- HTML
+- CSS
+- JavaScript
+
+If you would like to read more about the making of this project, check out my blog post on the topic ([Project Breakdown: Tic-Tac-Toe](https://risclover.github.io/)).
+
 ## Links
 [Back to Top](#table-of-contents)
+
+* [Live site](https://risclover.github.io/Tic-Tac-Toe)
+* [Code repo](https://www.github.com/Risclover/Tic-Tac-Toe) (You are here!)
+* [Project Breakdown](https://risclover.github.io)
