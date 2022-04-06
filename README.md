@@ -16,8 +16,6 @@
 
 This is Tic Tac Toe, the classic game that we've all played as children. Two players play against one another on one computer. Choose how many rounds you want to play, use custom markers, and be the first to 3 in a row! Testing
 
-![](./images/ttt_desktop.png)
-
 ![](./images/ttt_desktop_open.png)
 
 ## Updates
@@ -35,32 +33,54 @@ Doing so will start a **1-round game** with **Player 1 as X** and **Player 2 as 
 
 ### Custom Game
 
+![](./images/ttt_desktop.png)
+
 Fill in form elements for any settings you wish to customize.
 
 1. Fill in each player's name. Leaving these fields blank will result in the players being called "Player 1" and "Player 2".
+   
+   ![](./images/ttt_names.png)
+
 2. Enter how many rounds you'd like to play. Leaving this dropdown menu blank will result in a 1-round game.
+
+   ![](./images/ttt_rounds.png)
+   
    * **Single Round**: Play a 1-round game.
    * **Pick Rounds**: Decide how many rounds you want to play. Input this number into the input box that appears after making this selection.
+  
+      ![](./images/ttt_rounds_box.png)
    * **Ongoing Rounds**: Play up to the maximum amount of rounds possible (9,007,199,254,740,991 rounds). Click the "Stop Game" button whenever you decide you're done.
 3. Pick your markers. Leaving this blank will result in Player 1 playing X's and Player 2 playing O's. 
+   
+   ![](./images/ttt_markers.png)
     - **Classic (X's and O's)**: Use the classic X and O markers. Decide who gets what.
+  
+      ![](./images/ttt_classic_markers.png)
+
     - **Custom**: Pick unique markers via the Fontawesome icons collection. (For more detail on how to do this, refer to the [Using Custom Markers](#using-custom-markers) section.)
 
-
+      ![](./images/ttt_custom_markers.png)
 ### How to Play
 1. Once the game begins, players will click on squares to set their markers.
 2. The first player to get 3 in a row in any direction wins.
 3. Make sure that you watch the top area to see who's turn it is. 
-    - First round: Whomever chose X goes first. If you're using custom markers, or if you didn't choose any markers, then Player 1 will go first.
-    - Subsequent rounds: Players will alternate going first each round.
+   
+   ![](./images/ttt_announcements.png)
+   
+   (*If ever in doubt, not only is there an announcement for whose turn it is, but that player's name will also be highlighted in yellow.*)
+    - **First round**: The player whose marker is X goes first. 
+        - If you're using custom markers, or if you didn't choose any markers, then Player 1 will go first by default.
+    - **Subsequent rounds**: Players will alternate going first each round, so if Player 1 went first last round, Player 2 will go first this round.
 4. If you fill the board with markers and nobody gets 3 in a row, this will result in a draw. If you're playing a designated number of rounds, note that this *will* count as a round played.
-5. The game ends in the following circumstances:
+5. The game ends when one of the following occurs:
    - 1 Round: When a player gets 3 in a row or when players tie.
    - Picked Rounds: When the number of rounds have been played, the player with the highest score wins.
-   - Ongoing Rounds: Goes on infinitely, or until the "Stop Game" button is pressed.
-6. If, when the game ends, players have identical scores, the game will offer a tiebreaker round. Please note that this is 100% optional. 
-   - Whoever wins the tiebreaker round wins.
-   - If players get another tie, additional tiebreaker rounds will continue to be offered until someone scores a point.
+   - Ongoing Rounds: Goes on infinitely, or until the "Stop Game" button is pressed (located beneath the gameboard during an "Ongoing" game).
+6. If, when the game ends, players have identical scores, the game will offer a tiebreaker round.
+   
+   ![](./images/ttt_tiebreaker.png)
+   - Whoever wins the tiebreaker round wins the whole thing.
+   - If players get another tie, additional tiebreaker rounds will continue to be offered until someone scores a point, or until the players decline the tiebreaker round.
 
 ### Using Custom Markers
 You have the option of using custom markers if you want. This game uses the Fontawesome library of icons to accomplish this. Simply follow these instructions.
