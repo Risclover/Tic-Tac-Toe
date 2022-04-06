@@ -1,23 +1,24 @@
 # Tic-Tac-Toe
  
 ## Table of Contents
-- [Tic-Tac-Toe](#tic-tac-toe)
-  - [Table of Contents](#table-of-contents)
-  - [Description](#description)
-  - [Updates](#updates)
-  - [How to Play](#how-to-play)
-    - [Quick Start](#quick-start)
-    - [Custom Game](#custom-game)
-    - [How to Play](#how-to-play-1)
-    - [Using Custom Markers](#using-custom-markers)
-  - [Build](#build)
-  - [Links](#links)
+  1. [Description](#description)
+  2. [Updates](#updates)
+  3. [How to Play](#how-to-play)
+     - [Quick Start](#quick-start)
+     - [Custom Game](#custom-game)
+     - [How to Play](#how-to-play-1)
+     - [Using Custom Markers](#using-custom-markers)
+  4. [Build](#build)
+  5. [Links](#links)
 
 ## Description
 [Back to Top](#table-of-contents)
 
-This is Tic Tac Toe, the classic game that we've all played as children. Two players play against one another on one computer. Choose how many rounds you want to play, use custom markers, and be the first to 3 in a row!
+This is Tic Tac Toe, the classic game that we've all played as children. Two players play against one another on one computer. Choose how many rounds you want to play, use custom markers, and be the first to 3 in a row! Testing
 
+![](./images/ttt_desktop.png)
+
+![](./images/ttt_desktop_open.png)
 
 ## Updates
 [Back to Top](#table-of-contents)
