@@ -189,6 +189,11 @@ const gamePlay = (() => {
     ];
 
     function newRound() {
+        if(tieBreaker === true) {
+            playerAnnounce.textContent = `${activePlayer.name} goes first.`
+        } else {
+            playerAnnounce.textContent = `${winner} won that round!`
+        }
         playerAnnounce.textContent = `${winner} won that round!`
         remainingSpots = 9;
         winner = "";
@@ -376,6 +381,7 @@ const gamePlay = (() => {
     }
 
     function tieBreakerRound() {
+        winnerDeclared = false;
         tieBreaker = true;
         roundDiv.innerHTML = "<p><strong>Rounds:</strong> Tiebreaker";
         newRound();
