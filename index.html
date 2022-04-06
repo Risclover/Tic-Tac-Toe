@@ -25,104 +25,140 @@
                 <p id="author">by <a href="https://www.github.com/Risclover" target="_blank">Risclover</a></p>
             </div>
         </div>
-
-        <!-- Instructions -->
+        <h2 class="instructions-text">Instructions <span class="material-icons expandbtn">expand_more</span></h2>
         <div class="instructions">
-            <!-- Game instructions -->
-            <h2 class="instructions-text">Instructions <span class="material-icons expandbtn">expand_more</span></h2>
             <div class="expand-instructions">
-            <p>This rendition of Tic Tac Toe requires 2 players to play on the same computer.  Players take turns placing their respective markers on the game board. The first person to get 3 markers in a row horizontally, vertically, or diagonally wins!
-            </p>
-            <p>
-                This version of Tic Tac Toe has some settings that you can set before you play, but if you want to start a game quickly without bothering with these, you can simply press the <strong>Start Game</strong> button to get started.
-            </p>
-            <ol>
-                <li>
-                    Either press Start Game to get started immediately, or customize your game via the settings before clicking Start Game.
-                    <ol type="a" style="font-weight: bold;">
-                        <li>
-                            <span>Starting without customizing the settings results in the following default settings:</span>
-                            <ul>
-                                <li>
-                                    <span><strong>Player 1 Name:</strong> Player 1</span>
-                                </li>
-                                <li>
-                                    <span><strong>Player 1 Marker:</strong> X</span>
-                                </li>
-                                <li>
-                                    <span><strong>Player 2 Name:</strong> Player 2</span>
-                                </li>
-                                <li>
-                                    <strong>Player 2 Marker:</strong> O
-                                </li>
-                                <li>
-                                    <strong>Rounds:</strong> 1
-                                </li>
-                            </ul>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-            <h2>Settings</h2>
-            <h3>Rounds</h3>
-            <ul>
-                <li>
-                    <strong>Single Round</strong>: Play a single round.
-                </li>
-                <li>
-                    <strong># of Rounds</strong>: Pick # of rounds to play.
-                </li>
-                <li>
-                    <strong>Ongoing Rounds</strong>: Play ongoing rounds until players decide to stop.
-                </li>
-            </ul>
-            <h3>Deciding Pieces</h3>
-            <p>X always goes first.</p>
-            <ul>
-                <li>
-                    <strong>Players Pick</strong>: Players decide amongst themselves who gets which piece.
-                    <ul>
-                        <li>
-                            <strong>Regular</strong>: Pick who gets "X" and who gets "O".
-                        </li>
-                        <li>
-                            <strong>Custom</strong>: If you would like to use custom markers, you can! This game uses Font Awesome's library of <strong>free</strong> icons. 
-                            <ol>
-                                <li>
-                                    Go to Font Awesome website, located at <a href="https://www.fontawesome.com" target="_blank">https://www.fontawesome.com/</a>
-                                </li>
-                                <li>
-                                    Click "Icons"
-                                </li>
-                                <li>
-                                    The version should automatically be set to the latest version. If you use Font Awesome regularly for your own purposes, make sure that it is  via the dropdown menu located in the search box.
-                                </li>
-                                <li>
-                                    To start viewing the library without searching for anything, simply click on the Search box and press Enter.
-                                </li>
-                                <li>
-                                    Select the "Free" filter. Pro icons will <strong>not</strong> work.
-                                </li>
-                                <li>
-                                    Find an icon to use as your marker and click on it.
-                                </li>
-                                <li>
-                                    When the icon information pops up, you will see a code snippet that looks similar to this: <code>&lt;i class="fa-solid fa-00"&gt;&lt;/i&gt;</code> Click on it to copy it to your clipboard.
-                                </li>
-                                <li>
-                                    Paste the <code>&lt;i&gt;&lt;/i&gt;</code> code snippet into the text box for your player's custom marker.
-                                </li>
-                            </ol>
-                        </li>
-                    </ul> 
-                </li>
-                <li>
-                    <strong>Alternate</strong>: Pieces alternate between players each round.
-                </li>
-                <li>
-                    <strong>Random</strong>: Computer chooses pieces at random at the start of each round.
-                </li>
-            </ul>
+                <p>
+                    This is Tic Tac Toe, the classic game that we've all played as children. Two players play against one another on one computer. Choose how many rounds you want to play, use custom markers, and be the first to 3 in a row!
+                </p>
+                <h3>Table of Contents</h3>
+                <ol id="table-of-contents">
+                    <li><a href="#quickstart">Quick Start</a></li>
+                    <li><a href="#customgame">Custom Game</a></li>
+                    <li><a href="#playingthegame">Playing the Game</a></li>
+                    <li><a href="#usingcustommarkers">Using Custom Markers</a></li>
+                </ol>
+
+                <!-- Quick Start -->
+                <h3 id="quickstart">Quick Start</h3>
+                <p>
+                    Click the "Start Game" button at the bottom of the form without filling any details out if you want to start a quick game. 
+                </p>
+                <p>
+                    Doing so will start a 1-round game with Player 1 as X and Player 2 as O.
+                </p>
+
+                <!-- Custom Game -->
+                <h3 id="customgame">Custom Game</h3>
+                <p>Fill in form elements for any settings you wish to customize.</p>
+                <ol>
+                    <li>Fill in each player's name. Leaving these fields blank will result in the players being called "Player 1" and "Player 2".</li>
+                    <li>Enter how many rounds you'd like to play. Leaving this blank will result in a 1-round game.
+                        <ul>
+                            <li>
+                                <strong>Single Round:</strong> Play a 1-round game
+                            </li>
+                            <li>
+                                <strong>Pick Rounds:</strong> Decide how many rounds you want to play. Input this number into the box that appears after making this selection.
+                            </li>
+                            <li>
+                                <strong>Ongoing Rounds:</strong> Play up to the maximum amount of rounds possible (9,007,199,254,740,991 rounds). Click the "Stop Game" button (located beneath the game board) to end the game when you decide that you're done.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Pick your markers. Leaving this dropdown menu blank will result in Player 1 as X's and Player 2 as O's.
+                        <ul>
+                            <li>
+                            <strong>Classic (X's and O's):</strong> Use the classic X and O markers. Decide who gets what via the new dropdown menus that appear.
+                            </li>
+                            <li><strong>Custom:</strong> Pick unique markers using the Font Awesome icons collection. For more information on how to do this, refer to the <a href="#usingcustommarkers">Using Custom Marker</a> section below.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <!-- Playing the Game -->
+                <h3 id="playingthegame">Playing the Game</h3>
+                <ol>
+                    <li>Once the game begins, players will take turns clicking squares to set their respective markers.</li>
+                    <li>The first player to get 3 markers in a row in any direction wins the round.</li>
+                    <li>
+                        Refer to the top box (just above the gameboard) to check to see who's turn it is.
+                        <ul>
+                            <li>
+                                <strong>First round:</strong> Whoever chose X goes first. If using custom markers, player 1 goes first.
+                            </li>
+                            <li>
+                                <strong>Subsequent rounds:</strong> Palyers will alternate going first each round.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        If you fill the board with markers and neither player gets 3 in a row, the round ends in a draw. This counts as a round play regardless of neither player scoring a point.
+                    </li>
+                    <li>
+                        The game will end in the following circumstances:
+                        <ul>
+                            <li>
+                                <strong>Single Round:</strong> A player gets 3 in a row or the board is filled, ending in a tie.
+                            </li>
+                            <li>
+                                <strong>
+                                    Picked Rounds:
+                                </strong> Once the chosen number of rounds have been played, the player with the highest score wins.
+                            </li>
+                            <li>
+                                <strong>Ongoing Rounds:</strong> Continues until the "Stop Game" button is pressed.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        When the game ends, if players have tied scores, the game will offer a tiebreaker round to break the tie.
+                        <ul>
+                            <li>
+                                Whomever wins the tiebreaker round wins the game.
+                            </li>
+                            <li>
+                                If this round ends in another tie, the game will offer additional tiebreaker rounds until either a) one player scores, or b) players decide to quit.
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <!-- Using Custom Markers -->
+                <h3 id="usingcustommarkers">Using Custom Markers</h3>
+                <p>You have the option of using custom markers via Font Awesome's library of icons. If you wish to do so and aren't sure how, follow the instructions here.</p>
+                <ol>
+                    <li>
+                        Select the "Custom" option in the "Game Pieces" dropdown menu, which will result in two new boxes appearing, one for each player's marker.
+                    </li>
+                    <li>
+                        Go to the Font Awesome website at <a href="https://www.fontawesome.com/" target="_blank">https://www.fontawesome.com</a>.
+                    </li>
+                    <li>
+                        Click "Icons"
+                    </li>
+                    <li>
+                        Make sure that the version is set to the latest version
+                    </li>
+                    <li>
+                        Use the filters to customize your search. Select "Free" so that only free icons show up. <strong>Pro icons will NOT work.</strong>
+                    </li>
+                    <li>
+                        When you find an icon you like, click on it. A popup window will open.
+                    </li>
+                    <li>
+                        You should see a code snippet in this popup window with the following format:
+                        <br><br>
+                        <code>&lt;i class="fa-solid fa-heart"&gt;&lt;/i&gt;</code>
+                        <br><br>
+                        Click on it to copy it to your clipboard, or highlight it and copy it yourself.
+                    </li>
+                    <li>
+                        Paste the code snippet into the correct player's input box. 
+                    </li>
+                </ol>
+                <p>As long as the version number is correct and the icon is a "Free" icon, this should work without any issues.</p>
             </div>
         </div>
 
@@ -133,10 +169,10 @@
                 <div class="announcements">
                     <div class="player-scores">
                         <div class="scorebox">
-                            <p><strong><span class="player1-label">Player 1</span>:</strong> <span class="score1">0</span></p>
+                            <p><strong><span class="label-back1"><span class="player1-label">Player 1</span>:</span></strong><span class="score1">0</span></p>
                         </div>
                         <div class="scorebox">
-                            <p><strong><span class="player2-label">Player 2</span>:</strong> <span class="score2">0</span></p>
+                            <p><strong><span class="label-back2"><span class="player2-label">Player 2</span>:</span></strong> <span class="score2">0</span></p>
                         </div>
                     </div>
                     <div class="round-number">
@@ -180,7 +216,7 @@
                         <select id="pieces">
                             <option value="default" selected disabled>Choose one</option>
                             <option value="Classic">Classic (X's and O's)</option>
-                            <option value="Custom">Custom</option>
+                            <option value="Custom">Custom (Font Awesome icons)</option>
                         </select>
                     </div>
                     <div class="classic-markers">

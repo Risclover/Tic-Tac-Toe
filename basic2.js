@@ -29,7 +29,8 @@ const instructionsText = document.querySelector('.instructions-text');
 const quitBtn = document.querySelector('.quitbtn');
 const tieBtn = document.createElement('button');
 const roundDiv = document.querySelector('.round-number');
-
+const p1LabelBack = document.querySelector('.label-back1');
+const p2LabelBack = document.querySelector('.label-back2')
 // Player factory
 const Players = (name, marker, score) => {
     return {name, marker, score};
@@ -109,10 +110,6 @@ const gameSetup = (() => {
                 roundsMode.setMode("ongoing");
                 rounds = Number.MAX_SAFE_INTEGER;    
                 totalRounds.textContent = "∞";
-                quitBtn.style.display = "block";
-                quitBtn.addEventListener('click', function() {
-                    gamePlay.endGame();
-                })
             }
             console.log(`Rounds: ${rounds}; Rounds Mode: ${roundsMode.getMode()}`);
         }
@@ -214,6 +211,12 @@ const gamePlay = (() => {
         mainBox.style.display = "grid";
         gameForm.style.display = "none";
         mainBox.innerHTML = "";
+        if (roundsPick.value === 'Ongoing') {
+            quitBtn.style.display = "block";
+            quitBtn.addEventListener('click', function() {
+                endGame();
+            })
+        }
         mainBox.style.gridTemplateColumns = `1fr 1fr 1fr`;
         mainBox.style.gridTemplateRows = `1fr 1fr 1fr`;
         for(let i = 0; i < 9; i++) {
@@ -296,11 +299,11 @@ const gamePlay = (() => {
         }
         if(activePlayer === playerOne) {
             
-            playerOneLabel.style.backgroundColor = "#fff189";
-            playerTwoLabel.style.backgroundColor = "white";
+            p1LabelBack.style.backgroundColor = "#fff189";
+            p2LabelBack.style.backgroundColor = "white";
         } else {
-            playerOneLabel.style.backgroundColor = "white";
-            playerTwoLabel.style.backgroundColor = "#fff189";
+            p1LabelBack.style.backgroundColor = "white";
+            p2LabelBack.style.backgroundColor = "#fff189";
         }
         console.log(winnerDeclared)
         playerAnnounce.textContent = `It's ${activePlayer.name}'s turn.`
@@ -352,6 +355,9 @@ const gamePlay = (() => {
     }
 
     function endGame() {
+        if(roundsMode.getMode() === "ongoing") {
+            quitBtn.style.display = "none";
+        }
         document.querySelector('.win-announce').textContent = "";
         const restartBtn = document.createElement('button');
         restartBtn.classList.add('restart');
