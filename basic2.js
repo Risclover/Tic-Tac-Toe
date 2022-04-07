@@ -1,6 +1,5 @@
 const faUnique = document.querySelector('.fa-unique');
 const faUnique2 = document.querySelector('.fa-unique2');
-const quickStart = document.querySelector('.quickstart');
 const startGame = document.querySelector('.startbtn')
 const mainBox = document.querySelector('.maincontainer');
 const gameForm = document.querySelector('.gameform');
@@ -31,11 +30,15 @@ const tieBtn = document.createElement('button');
 const roundDiv = document.querySelector('.round-number');
 const p1LabelBack = document.querySelector('.label-back1');
 const p2LabelBack = document.querySelector('.label-back2')
-// Player factory
+
+
+// Player factory; create player's "profile" (name, marker, and score)
 const Players = (name, marker, score) => {
     return {name, marker, score};
 }
 
+
+// Modes facotry; get and set the game's rounds mode
 const Modes = (mode) => {
     const getMode = () => mode;
     
@@ -45,6 +48,8 @@ const Modes = (mode) => {
 
     return {getMode, setMode};
 }
+
+
 let roundsMode = Modes("single");
 const playerOne = Players("Player 1", "X", 0)
 const playerTwo = Players("Player 2", "O", 0)
@@ -54,7 +59,8 @@ let roundsPassed = 1;
 let tieBreaker = false;
 let wentFirst = "";
 
-// Game Setup 
+
+// Game Setup; takes the form responses and sets up the game according to what the player chooses.
 const gameSetup = (() => {
     instructionsText.addEventListener('click', function() {
         if(expandBtn.textContent === "expand_more") {
@@ -162,6 +168,8 @@ const gameSetup = (() => {
         console.log(`Player 2 marker: ${playerTwo.marker}`)
     })
 
+
+    // Form element "on change" event listeners
     pieces.addEventListener('change', setMarkers);
     roundsPick.addEventListener('change', setRounds);
     playerOneName.addEventListener('change', setNamesP1);
@@ -174,7 +182,7 @@ const gameSetup = (() => {
 
 
 
-// Game Play
+// Game Play; everything that happens during the actual gameplay.
 const gamePlay = (() => {
     let remainingSpots = 9;
     let winner = "";
@@ -185,6 +193,7 @@ const gamePlay = (() => {
         ["", "", ""]
     ];
 
+    // 
     function newRound() {
         if(tieBreaker === true) {
             playerAnnounce.textContent = `${activePlayer.name} goes first.`
@@ -211,6 +220,7 @@ const gamePlay = (() => {
         createGameboard();
     };
 
+    // Creates the tic tac toe grid/gameboard. Also contains what happens when a square is clicked on.
     function createGameboard() {
         announcements.style.display = "flex";
         mainBox.style.display = "grid";
@@ -269,6 +279,7 @@ const gamePlay = (() => {
         });
     }
 
+    // After the gameboard is set up and a square is clicked on, this is what happens when a round is "played"
     function playRound() {
         document.querySelector('.win-announce').textContent = "";
         remainingSpots -= 1;
@@ -284,6 +295,7 @@ const gamePlay = (() => {
         }
     }
 
+    // Condition for when the round is tied
     function gameTie() {
         winner = "Nobody";
         if(tieBreaker === true && roundsMode.getMode() === "ongoing") {
@@ -295,6 +307,7 @@ const gamePlay = (() => {
         }
     }
 
+    // Changes players after each round
     function changePlayer() {
         console.log(`Remaining spots: ${remainingSpots}; Winner declared: ${winnerDeclared}; winner: ${winner}`)
         if(activePlayer === playerOne) {
@@ -317,6 +330,7 @@ const gamePlay = (() => {
         }
     }
 
+    // Checks for winning line of markers
     function checkWinner() {
         const winningAxes = [
             [0,1,2],
@@ -359,6 +373,7 @@ const gamePlay = (() => {
         }
     }
 
+    // End of game function.
     function endGame() {
         if(roundsMode.getMode() === "ongoing") {
             quitBtn.style.display = "none";
@@ -386,6 +401,7 @@ const gamePlay = (() => {
         disableBoard();
     }
 
+    // What happens when there's a tie breaker. (Sets up information and goes to newRound()).
     function tieBreakerRound() {
         winnerDeclared = false;
         tieBreaker = true;
@@ -393,6 +409,7 @@ const gamePlay = (() => {
         newRound();
     }
 
+    // Disables the board (aka makes it go bye-bye)
     function disableBoard() {
         mainBox.style.display = "none";
     }
