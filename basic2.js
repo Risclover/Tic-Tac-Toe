@@ -1,42 +1,7 @@
-const faUnique = document.querySelector('.fa-unique');
-const faUnique2 = document.querySelector('.fa-unique2');
-const startGame = document.querySelector('.startbtn')
-const mainBox = document.querySelector('.maincontainer');
-const gameForm = document.querySelector('.gameform');
-const playerAnnounce = document.querySelector('.player-announce');
-const score1 = document.querySelector('.score1');
-const score2 = document.querySelector('.score2');
-const roundsPick = document.querySelector('#roundspick');
-const roundsWrapper = document.querySelector('#wrapper2');
-const roundsVal = document.querySelector('.rounds-val');
-const pieces = document.querySelector('#pieces');
-const classicMarkers = document.querySelector('.classic-markers');
-const customMarkers = document.querySelector('.custom-markers')
-const option1 = document.querySelector('#option1');
-const option2 = document.querySelector('#option2');
-const playerOneName = document.querySelector('#player1name');
-const playerTwoName = document.querySelector('#player2name');
-const currentRound = document.querySelector('.current-round');
-const totalRounds = document.querySelector('.total-rounds');
-const playerOneLabel = document.querySelector('.player1-label');
-const playerTwoLabel = document.querySelector('.player2-label');
-const roundAnnounce = document.createElement('span');
-const announcements = document.querySelector('.announcements');
-const expandInstructions = document.querySelector('.expand-instructions');
-const expandBtn = document.querySelector('.expandbtn');
-const instructionsText = document.querySelector('.instructions-text');
-const quitBtn = document.querySelector('.quitbtn');
-const tieBtn = document.createElement('button');
-const roundDiv = document.querySelector('.round-number');
-const p1LabelBack = document.querySelector('.label-back1');
-const p2LabelBack = document.querySelector('.label-back2')
-
-
 // Player factory; create player's "profile" (name, marker, and score)
 const Players = (name, marker, score) => {
     return {name, marker, score};
 }
-
 
 // Modes facotry; get and set the game's rounds mode
 const Modes = (mode) => {
@@ -49,20 +14,35 @@ const Modes = (mode) => {
     return {getMode, setMode};
 }
 
-
 let roundsMode = Modes("single");
 const playerOne = Players("Player 1", "X", 0)
 const playerTwo = Players("Player 2", "O", 0)
+
+const mainBox = document.querySelector('.maincontainer');
+const playerAnnounce = document.querySelector('.player-announce');
+const roundsPick = document.querySelector('#roundspick');
+const totalRounds = document.querySelector('.total-rounds');
+
 let activePlayer = playerOne;
 let rounds = 1;
 let roundsPassed = 1;
 let tieBreaker = false;
 let wentFirst = "";
 
-
 // Game Setup; takes the form responses and sets up the game according to what the player chooses.
 const gameSetup = (() => {
+    const pieces = document.querySelector('#pieces');
+    const playerOneName = document.querySelector('#player1name');
+    const playerTwoName = document.querySelector('#player2name');
+    const option1 = document.querySelector('#option1');
+    const option2 = document.querySelector('#option2');
+    const instructionsText = document.querySelector('.instructions-text');
+    const faUnique = document.querySelector('.fa-unique');
+    const faUnique2 = document.querySelector('.fa-unique2');
+
     instructionsText.addEventListener('click', function() {
+        const expandBtn = document.querySelector('.expandbtn');
+        const expandInstructions = document.querySelector('.expand-instructions');
         if(expandBtn.textContent === "expand_more") {
             expandBtn.textContent = "expand_less";
             expandInstructions.style.display = "block";
@@ -74,12 +54,14 @@ const gameSetup = (() => {
 
     // Set player names
     function setNamesP1() {
+        const playerOneLabel = document.querySelector('.player1-label');
         playerOne.name = playerOneName.value;
         playerOneLabel.textContent = playerOne.name;
         console.log(`Player 1's name is ${playerOne.name}.`)
     }
 
     function setNamesP2() {
+        const playerTwoLabel = document.querySelector('.player2-label');
         playerTwo.name = playerTwoName.value;
         playerTwoLabel.textContent = playerTwo.name;
         console.log(`Player 2's name is ${playerTwo.name}.`)
@@ -88,6 +70,8 @@ const gameSetup = (() => {
 
     // Set up # of rounds and rounds mode
     function setRounds() {
+        const roundsVal = document.querySelector('.rounds-val');
+        const roundsWrapper = document.querySelector('#wrapper2');
         let roundsValue = roundsVal.value;
 
         // Rounds mode: "pick"
@@ -131,6 +115,8 @@ const gameSetup = (() => {
 
     // Set player markers
     function setMarkers() {
+        const classicMarkers = document.querySelector('.classic-markers');
+        const customMarkers = document.querySelector('.custom-markers');
         if(pieces.value === "Classic") {
             classicMarkers.style.display = "flex";
             customMarkers.style.display = "none";
@@ -163,6 +149,7 @@ const gameSetup = (() => {
         playerOne.marker = faUnique.value;
         console.log(`Player 1 marker: ${playerOne.marker}`)
     })
+    
     faUnique2.addEventListener('change', function() {
         playerTwo.marker = faUnique2.value;
         console.log(`Player 2 marker: ${playerTwo.marker}`)
@@ -181,9 +168,10 @@ const gameSetup = (() => {
 })();
 
 
-
 // Game Play; everything that happens during the actual gameplay.
 const gamePlay = (() => {
+    const startGame = document.querySelector('.startbtn');
+    const quitBtn = document.querySelector('.quitbtn');
     let remainingSpots = 9;
     let winner = "";
     let winnerDeclared = false;
@@ -222,9 +210,9 @@ const gamePlay = (() => {
 
     // Creates the tic tac toe grid/gameboard. Also contains what happens when a square is clicked on.
     function createGameboard() {
-        announcements.style.display = "flex";
+        document.querySelector('.announcements').style.display = "flex";
         mainBox.style.display = "grid";
-        gameForm.style.display = "none";
+        document.querySelector('.gameform').style.display = "none";
         mainBox.innerHTML = "";
         if (roundsPick.value === 'Ongoing') {
             quitBtn.style.display = "block";
@@ -239,8 +227,9 @@ const gamePlay = (() => {
             mainBox.appendChild(square);
             square.classList.add('square', 's' + i);
         }
+        const roundAnnounce = document.createElement('span');
         playerAnnounce.appendChild(roundAnnounce);
-        currentRound.textContent = roundsPassed;
+        document.querySelector('.current-round').textContent = roundsPassed;
         if(roundsMode.getMode() !== "ongoing") {
             totalRounds.textContent = rounds;
         }
@@ -310,13 +299,14 @@ const gamePlay = (() => {
     // Changes players after each round
     function changePlayer() {
         console.log(`Remaining spots: ${remainingSpots}; Winner declared: ${winnerDeclared}; winner: ${winner}`)
+        const p1LabelBack = document.querySelector('.label-back1');
+        const p2LabelBack = document.querySelector('.label-back2');
         if(activePlayer === playerOne) {
             activePlayer = playerTwo;
         } else {
             activePlayer = playerOne;
         }
         if(activePlayer === playerOne) {
-            
             p1LabelBack.style.backgroundColor = "#fff189";
             p2LabelBack.style.backgroundColor = "white";
         } else {
@@ -356,8 +346,8 @@ const gamePlay = (() => {
                 }
                 document.querySelector('.win-announce').textContent = `${winner} won that round!`;
 
-                score1.textContent = parseInt(playerOne.score);
-                score2.textContent = parseInt(playerTwo.score);
+                document.querySelector('.score1').textContent = parseInt(playerOne.score);
+                document.querySelector('.score2').textContent = parseInt(playerTwo.score);
             } 
         })
         if(winnerDeclared === true) {
@@ -375,6 +365,7 @@ const gamePlay = (() => {
 
     // End of game function.
     function endGame() {
+        const tieBtn = document.createElement('button');
         if(roundsMode.getMode() === "ongoing") {
             quitBtn.style.display = "none";
         }
@@ -405,7 +396,7 @@ const gamePlay = (() => {
     function tieBreakerRound() {
         winnerDeclared = false;
         tieBreaker = true;
-        roundDiv.innerHTML = "<p><strong>Rounds:</strong> Tiebreaker";
+        document.querySelector('.round-number').innerHTML = "<p><strong>Rounds:</strong> Tiebreaker";
         newRound();
     }
 
@@ -414,18 +405,8 @@ const gamePlay = (() => {
         mainBox.style.display = "none";
     }
 
+
     startGame.addEventListener('click', createGameboard);
     
     return {newRound, board, remainingSpots, endGame};
 })();
-
-
-/*
-
-    [x] Figure out how to make entire game end when rounds are over
-    [x] Set up turn announcements
-    [x] Set up "(name) goes first" announcements @ start of new round
-    [ ] Figure out how to do tiebreakers
-        [ ] And also what to do if tiebreaker is also a draw
-
-*/
